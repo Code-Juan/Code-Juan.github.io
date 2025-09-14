@@ -49,13 +49,8 @@ function updateNavigation(currentSection) {
         link.style.display = "block";
     });
     
-    // Hide Home link in audience-specific sections
-    if (currentSection === "game-dev" || currentSection === "web-services") {
-        const homeLink = document.querySelector('a[onclick="showSection(\'home\')"]');
-        if (homeLink) {
-            homeLink.style.display = "none";
-        }
-    }
+    // Keep Home button visible in all sections for better navigation
+    // Removed the code that hides Home button in audience sections
     
     // Set active state for current section
     const activeLink = document.querySelector(`a[onclick="showSection('${currentSection}')"]`);

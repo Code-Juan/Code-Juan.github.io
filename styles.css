@@ -72,6 +72,7 @@ section#home {
     margin-bottom: 1rem;
     transition: all 0.3s ease;
     opacity: 0.8;
+    cursor: pointer;
 }
 
 .back-to-home:hover {
@@ -157,6 +158,7 @@ body {
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
+    cursor: pointer;
 }
 
 .nav-link:hover {
@@ -982,6 +984,7 @@ section {
     color: #d1d5db;
     text-decoration: none;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 
 .footer-links a:hover {
