@@ -1,6 +1,6 @@
 /* CSS Variables for Theme System */
 :root {
-    /* Light Theme (Default) */
+    /* Light Theme (Default) - Base colors */
     --primary-color: #2563eb;
     --secondary-color: #7c3aed;
     --bg-color: #ffffff;
@@ -9,10 +9,10 @@
     --card-bg: #f9fafb;
     --border-color: #e5e7eb;
     --shadow: rgba(0, 0, 0, 0.1);
-    --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --hero-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
-/* Dark Theme */
+/* Dark Theme - Base colors */
 [data-theme="dark"] {
     --primary-color: #3b82f6;
     --secondary-color: #8b5cf6;
@@ -22,12 +22,13 @@
     --card-bg: #1f2937;
     --border-color: #374151;
     --shadow: rgba(0, 0, 0, 0.3);
-    --hero-bg: linear-gradient(135deg, #1e3a8a 0%, #581c87 100%);
+    --hero-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
-/* Custom Theme (will be set dynamically) */
+/* Custom Colors Theme - Uses current base theme with custom accent colors */
 [data-theme="custom"] {
-    /* Variables will be set via JavaScript */
+    /* Custom accent colors will be set via JavaScript */
+    /* Base theme colors remain from light or dark theme */
 }
 
 /* Reset and Base Styles */

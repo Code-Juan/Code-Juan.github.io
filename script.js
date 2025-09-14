@@ -395,34 +395,18 @@ document.head.appendChild(activeNavStyles);
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize theme system
     const savedTheme = localStorage.getItem('theme') || 'light';
-
-    if (savedTheme === 'custom') {
-        // Restore custom theme
-        const customTheme = JSON.parse(localStorage.getItem('customTheme') || '{}');
-        if (customTheme.primary && customTheme.secondary) {
-            // Apply the saved custom theme
-            document.documentElement.style.setProperty('--primary-color', customTheme.primary);
-            document.documentElement.style.setProperty('--secondary-color', customTheme.secondary);
-            if (customTheme.bgColor) {
-                document.documentElement.style.setProperty('--bg-color', customTheme.bgColor);
-            }
-            if (customTheme.textColor) {
-                document.documentElement.style.setProperty('--text-color', customTheme.textColor);
-            }
-            // Recalculate other colors if not saved
-            if (!customTheme.bgColor || !customTheme.textColor) {
-                const bgColor = getBackgroundColor(customTheme.primary, customTheme.secondary);
-                const textColor = getContrastColor(bgColor);
-                document.documentElement.style.setProperty('--bg-color', bgColor);
-                document.documentElement.style.setProperty('--text-color', textColor);
-                document.documentElement.style.setProperty('--text-light', adjustColorOpacity(textColor, 0.7));
-                document.documentElement.style.setProperty('--card-bg', adjustColorLightness(bgColor, 0.05));
-                document.documentElement.style.setProperty('--border-color', adjustColorLightness(bgColor, 0.1));
-            }
-            document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${customTheme.primary}, ${customTheme.secondary})`);
-        }
+    const savedBaseTheme = localStorage.getItem('baseTheme') || 'light';
+    const savedCustomColors = localStorage.getItem('customColors');
+    
+    // Set base theme
+    baseTheme = savedBaseTheme;
+    
+    if (savedTheme === 'custom' && savedCustomColors) {
+        // Restore custom colors
+        customColors = JSON.parse(savedCustomColors);
         setTheme('custom');
     } else {
+        // Set base theme
         setTheme(savedTheme);
     }
 
@@ -444,6 +428,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Theme System
 let currentTheme = 'light';
+let baseTheme = 'light'; // 'light' or 'dark'
+let customColors = null; // { primary: '#color', secondary: '#color' }
 
 function toggleThemeMenu() {
     const menu = document.getElementById('theme-menu');
@@ -456,6 +442,8 @@ function selectTheme(theme) {
     if (theme === 'custom') {
         openThemeModal();
     } else {
+        // Set base theme (light or dark)
+        baseTheme = theme;
         setTheme(theme);
     }
     // Close the menu
@@ -467,19 +455,62 @@ function selectTheme(theme) {
 
 function setTheme(theme) {
     currentTheme = theme;
-    document.documentElement.setAttribute('data-theme', theme);
+    
+    if (theme === 'custom') {
+        // Apply custom colors to current base theme
+        document.documentElement.setAttribute('data-theme', baseTheme);
+        if (customColors) {
+            applyCustomColors(customColors);
+        }
+    } else {
+        // Set base theme and clear custom colors
+        baseTheme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        customColors = null;
+        // Clear any custom color overrides
+        clearCustomColors();
+    }
+    
+    // Save theme state
     localStorage.setItem('theme', theme);
-
+    localStorage.setItem('baseTheme', baseTheme);
+    if (customColors) {
+        localStorage.setItem('customColors', JSON.stringify(customColors));
+    } else {
+        localStorage.removeItem('customColors');
+    }
+    
     // Update theme toggle button icon
     updateThemeToggleIcon();
+}
+
+function applyCustomColors(colors) {
+    // Apply custom accent colors while keeping base theme
+    document.documentElement.style.setProperty('--primary-color', colors.primary);
+    document.documentElement.style.setProperty('--secondary-color', colors.secondary);
+    document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`);
+}
+
+function clearCustomColors() {
+    // Remove custom color overrides to return to base theme colors
+    document.documentElement.style.removeProperty('--primary-color');
+    document.documentElement.style.removeProperty('--secondary-color');
+    document.documentElement.style.removeProperty('--hero-bg');
 }
 
 function updateThemeToggleIcon() {
     const toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
-
+    
     const icons = toggle.querySelectorAll('i');
-    const themeIndex = currentTheme === 'light' ? 0 : currentTheme === 'dark' ? 1 : 2;
+    let themeIndex;
+    
+    if (currentTheme === 'custom') {
+        themeIndex = 2; // Palette icon for custom colors
+    } else {
+        themeIndex = baseTheme === 'light' ? 0 : 1; // Sun or moon based on base theme
+    }
+    
     icons.forEach((icon, index) => {
         icon.style.opacity = index === themeIndex ? '1' : '0';
     });
@@ -490,16 +521,16 @@ function openThemeModal() {
     if (modal) {
         modal.style.display = 'block';
         // Load current custom colors if they exist
-        const customColors = JSON.parse(localStorage.getItem('customTheme') || '{}');
-        if (customColors.primary) {
+        if (customColors) {
             document.getElementById('primary-color').value = customColors.primary;
-        } else {
-            document.getElementById('primary-color').value = '#2563eb';
-        }
-        if (customColors.secondary) {
             document.getElementById('secondary-color').value = customColors.secondary;
         } else {
-            document.getElementById('secondary-color').value = '#7c3aed';
+            // Use default colors based on current base theme
+            const defaultColors = baseTheme === 'dark' 
+                ? { primary: '#3b82f6', secondary: '#8b5cf6' }
+                : { primary: '#2563eb', secondary: '#7c3aed' };
+            document.getElementById('primary-color').value = defaultColors.primary;
+            document.getElementById('secondary-color').value = defaultColors.secondary;
         }
         updateCustomTheme();
     }
@@ -531,47 +562,33 @@ function updateCustomTheme() {
 function applyCustomTheme() {
     const primaryColor = document.getElementById('primary-color').value;
     const secondaryColor = document.getElementById('secondary-color').value;
-
-    console.log('Applying custom theme:', primaryColor, secondaryColor);
-    console.log('Primary RGB:', hexToRgb(primaryColor));
-    console.log('Secondary RGB:', hexToRgb(secondaryColor));
-
-    // Calculate text colors for accessibility
-    const primaryTextColor = getContrastColor(primaryColor);
-    const secondaryTextColor = getContrastColor(secondaryColor);
-    const bgColor = getBackgroundColor(primaryColor, secondaryColor);
-    const textColor = getContrastColor(bgColor);
-
-    console.log('Calculated colors:', { bgColor, textColor });
-
-    // Set custom theme variables directly on the root element
-    document.documentElement.style.setProperty('--primary-color', primaryColor);
-    document.documentElement.style.setProperty('--secondary-color', secondaryColor);
-    document.documentElement.style.setProperty('--bg-color', bgColor);
-    document.documentElement.style.setProperty('--text-color', textColor);
-    document.documentElement.style.setProperty('--text-light', adjustColorOpacity(textColor, 0.7));
-    document.documentElement.style.setProperty('--card-bg', adjustColorLightness(bgColor, 0.05));
-    document.documentElement.style.setProperty('--border-color', adjustColorLightness(bgColor, 0.1));
-    document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`);
-
-    // Save custom theme
-    const customTheme = {
+    
+    console.log('Applying custom colors:', primaryColor, secondaryColor);
+    console.log('Base theme:', baseTheme);
+    
+    // Store custom colors
+    customColors = {
         primary: primaryColor,
-        secondary: secondaryColor,
-        bgColor: bgColor,
-        textColor: textColor
+        secondary: secondaryColor
     };
-    localStorage.setItem('customTheme', JSON.stringify(customTheme));
-
-    // Set theme to custom and update UI
+    
+    // Apply custom colors to current base theme
+    applyCustomColors(customColors);
+    
+    // Set theme to custom
     currentTheme = 'custom';
-    document.documentElement.setAttribute('data-theme', 'custom');
+    document.documentElement.setAttribute('data-theme', baseTheme);
+    
+    // Save theme state
     localStorage.setItem('theme', 'custom');
+    localStorage.setItem('baseTheme', baseTheme);
+    localStorage.setItem('customColors', JSON.stringify(customColors));
+    
+    // Update UI
     updateThemeToggleIcon();
-
     closeThemeModal();
-
-    console.log('Custom theme applied successfully');
+    
+    console.log('Custom colors applied successfully');
 }
 
 function resetCustomTheme() {
@@ -583,7 +600,7 @@ function resetCustomTheme() {
 // Utility functions for color calculations
 function getContrastColor(color) {
     let rgb;
-    
+
     // Handle both hex and RGB color formats
     if (color.startsWith('rgb(')) {
         // Parse RGB string like "rgb(255, 255, 255)"
@@ -599,12 +616,12 @@ function getContrastColor(color) {
         // Handle hex color
         rgb = hexToRgb(color);
     }
-    
+
     if (!rgb) {
         console.error('Invalid color format:', color);
         return '#1f2937'; // Default to dark text
     }
-    
+
     const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
     return brightness > 128 ? '#1f2937' : '#f9fafb';
 }
