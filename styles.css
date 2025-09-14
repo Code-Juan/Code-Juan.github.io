@@ -353,6 +353,73 @@ section {
     margin-bottom: 1rem;
 }
 
+/* Portfolio Section */
+.portfolio {
+    background-color: #f9fafb;
+}
+
+.portfolio-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+    gap: 1rem;
+}
+
+.tab-button {
+    padding: 0.75rem 2rem;
+    border: 2px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.tab-button.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.project-category {
+    margin-bottom: 3rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    border-radius: 2px;
+}
+
 /* Projects Section */
 .projects-grid {
     display: grid;
@@ -904,6 +971,16 @@ section {
 
     .testimonials-grid {
         grid-template-columns: 1fr;
+    }
+
+    .portfolio-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-button {
+        width: 100%;
+        max-width: 200px;
     }
 }
 

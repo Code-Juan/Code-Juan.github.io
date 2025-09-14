@@ -315,18 +315,38 @@ activeNavStyles.textContent = `
 `;
 document.head.appendChild(activeNavStyles);
 
+// Portfolio Tab Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+});
+
 // Console welcome message
 console.log(`
-🚀 Welcome to Juan Contreras - Web Developer for Small Businesses!
+🚀 Welcome to Juan Contreras - Game Programmer & Web Developer!
    
    Built with:
    • HTML5 & CSS3
    • Vanilla JavaScript
    • Modern Design Principles
    • Responsive Layout
-   • Business-Focused Design
+   • Game Development Focus
    
-   Ready to grow your business online? Let's talk!
+   Ready to build amazing games and websites? Let's talk!
 `);
 
 // Add some fun easter eggs
