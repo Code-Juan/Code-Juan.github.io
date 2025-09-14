@@ -50,9 +50,6 @@
                     <a onclick="showSection('web-services')" class="nav-link">Web Services</a>
                 </li>
                 <li class="nav-item">
-                    <a onclick="showSection('contact')" class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item">
                     <a onclick="showSection('contact')" class="nav-link cta-button">Get in Touch</a>
                 </li>
             </ul>
@@ -145,8 +142,14 @@
     <!-- Portfolio Section -->
     <section id="game-dev" class="portfolio">
         <div class="container">
-            <h2 class="section-title">Game Development Portfolio</h2>
-            <p class="section-intro">Showcasing my game development projects and technical skills in Unity, Unreal Engine, and C++ programming.</p>
+            <div class="section-header">
+                <a onclick="showSection('home')" class="back-to-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <h2 class="section-title">Game Development Portfolio</h2>
+                <p class="section-intro">Showcasing my game development projects and technical skills in Unity, Unreal
+                    Engine, and C++ programming.</p>
+            </div>
             <!-- Game Projects Tab -->
             <div class="tab-content active" id="game-projects">
 
@@ -262,9 +265,15 @@
     <!-- Services Section -->
     <section id="web-services" class="services">
         <div class="container">
-            <h2 class="section-title">Web Development Services</h2>
-            <p class="services-intro">Professional web development services for businesses. I create custom, responsive websites that help you grow online and reach more customers.</p>
-            
+            <div class="section-header">
+                <a onclick="showSection('home')" class="back-to-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <h2 class="section-title">Web Development Services</h2>
+                <p class="services-intro">Professional web development services for businesses. I create custom, responsive
+                    websites that help you grow online and reach more customers.</p>
+            </div>
+
             <!-- Web Projects Showcase -->
             <div class="projects-showcase">
                 <h3 class="showcase-title">Recent Web Projects</h3>
@@ -278,9 +287,12 @@
                         <div class="project-content">
                             <h3 class="project-title">Project Stone</h3>
                             <p class="project-description">
-                                <strong>Technology:</strong> Flutter/Dart, Cross-Platform Development, Supabase Backend<br>
-                                <strong>Features:</strong> Project management for contractors, customer database, phase tracking, reporting<br>
-                                <strong>Platforms:</strong> Windows, Web, Mobile with SQLite local storage and cloud sync
+                                <strong>Technology:</strong> Flutter/Dart, Cross-Platform Development, Supabase
+                                Backend<br>
+                                <strong>Features:</strong> Project management for contractors, customer database, phase
+                                tracking, reporting<br>
+                                <strong>Platforms:</strong> Windows, Web, Mobile with SQLite local storage and cloud
+                                sync
                             </p>
                             <div class="project-tech">
                                 <span class="tech-tag">Flutter</span>
@@ -289,7 +301,8 @@
                                 <span class="tech-tag">Supabase</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link" target="_blank">
+                                <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link"
+                                    target="_blank">
                                     <i class="fab fa-github"></i> View Code
                                 </a>
                             </div>
@@ -306,8 +319,10 @@
                             <h3 class="project-title">The Wooden Stone LLC</h3>
                             <p class="project-description">
                                 <strong>Technology:</strong> Node.js/Express, HTML5/CSS3, Postmark Email API<br>
-                                <strong>Features:</strong> Professional contractor website, contact forms, project portfolio, SEO optimization<br>
-                                <strong>Backend:</strong> Express server with security middleware, rate limiting, and email integration
+                                <strong>Features:</strong> Professional contractor website, contact forms, project
+                                portfolio, SEO optimization<br>
+                                <strong>Backend:</strong> Express server with security middleware, rate limiting, and
+                                email integration
                             </p>
                             <div class="project-tech">
                                 <span class="tech-tag">Node.js</span>
@@ -316,7 +331,8 @@
                                 <span class="tech-tag">SEO</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link" target="_blank">
+                                <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link"
+                                    target="_blank">
                                     <i class="fab fa-github"></i> View Code
                                 </a>
                             </div>
@@ -333,8 +349,10 @@
                             <h3 class="project-title">Local Business Website</h3>
                             <p class="project-description">
                                 <strong>The Problem:</strong> Client's site was outdated and not mobile-friendly.<br>
-                                <strong>The Solution:</strong> Redesigned with modern layout, added contact forms, and optimized for speed.<br>
-                                <strong>The Result:</strong> Site now loads 3x faster and client receives leads directly via email.
+                                <strong>The Solution:</strong> Redesigned with modern layout, added contact forms, and
+                                optimized for speed.<br>
+                                <strong>The Result:</strong> Site now loads 3x faster and client receives leads directly
+                                via email.
                             </p>
                             <div class="project-tech">
                                 <span class="tech-tag">HTML/CSS</span>
@@ -359,8 +377,10 @@
                         <div class="project-content">
                             <h3 class="project-title">Restaurant Website Demo</h3>
                             <p class="project-description">
-                                <strong>Features:</strong> Online menu, reservation system, contact forms, and mobile-optimized design.<br>
-                                <strong>Result:</strong> Professional online presence that showcases food and drives reservations.
+                                <strong>Features:</strong> Online menu, reservation system, contact forms, and
+                                mobile-optimized design.<br>
+                                <strong>Result:</strong> Professional online presence that showcases food and drives
+                                reservations.
                             </p>
                             <div class="project-tech">
                                 <span class="tech-tag">Responsive Design</span>
@@ -385,8 +405,10 @@
                         <div class="project-content">
                             <h3 class="project-title">Contractor Website Demo</h3>
                             <p class="project-description">
-                                <strong>Features:</strong> Service showcase, project gallery, lead capture forms, and local SEO optimization.<br>
-                                <strong>Result:</strong> Professional website that builds trust and generates qualified leads.
+                                <strong>Features:</strong> Service showcase, project gallery, lead capture forms, and
+                                local SEO optimization.<br>
+                                <strong>Result:</strong> Professional website that builds trust and generates qualified
+                                leads.
                             </p>
                             <div class="project-tech">
                                 <span class="tech-tag">Lead Generation</span>

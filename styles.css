@@ -55,6 +55,34 @@ section#home {
     border-radius: 2px;
 }
 
+/* Section Header with Back to Home */
+.section-header {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.back-to-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.back-to-home:hover {
+    opacity: 1;
+    transform: translateX(-5px);
+}
+
+.back-to-home i {
+    font-size: 0.8rem;
+}
+
 html {
     scroll-behavior: smooth;
 }

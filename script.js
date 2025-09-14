@@ -11,13 +11,8 @@ function showSection(sectionId) {
         selectedSection.classList.add("active");
     }
     
-    // Update navigation active state
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        link.classList.remove("active");
-        if (link.getAttribute("onclick") && link.getAttribute("onclick").includes(sectionId)) {
-            link.classList.add("active");
-        }
-    });
+    // Update navigation based on context
+    updateNavigation(sectionId);
     
     // Handle scrolling
     if (sectionId === "home") {
@@ -33,6 +28,31 @@ function showSection(sectionId) {
                 behavior: "smooth"
             });
         }
+    }
+}
+
+// Context-aware navigation
+function updateNavigation(currentSection) {
+    const navLinks = document.querySelectorAll(".nav-link");
+    
+    // Reset all links
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        link.style.display = "block";
+    });
+    
+    // Hide Home link in audience-specific sections
+    if (currentSection === "game-dev" || currentSection === "web-services") {
+        const homeLink = document.querySelector('a[onclick="showSection(\'home\')"]');
+        if (homeLink) {
+            homeLink.style.display = "none";
+        }
+    }
+    
+    // Set active state for current section
+    const activeLink = document.querySelector(`a[onclick="showSection('${currentSection}')"]`);
+    if (activeLink) {
+        activeLink.classList.add("active");
     }
 }
 
