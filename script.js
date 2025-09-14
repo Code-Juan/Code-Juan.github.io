@@ -395,7 +395,7 @@ document.head.appendChild(activeNavStyles);
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize theme system
     const savedTheme = localStorage.getItem('theme') || 'light';
-    
+
     if (savedTheme === 'custom') {
         // Restore custom theme
         const customTheme = JSON.parse(localStorage.getItem('customTheme') || '{}');
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         setTheme(savedTheme);
     }
-    
+
     // Ensure home section is visible on page load
     const homeSection = document.getElementById("home");
     if (homeSection) {
@@ -477,10 +477,11 @@ function setTheme(theme) {
 function updateThemeToggleIcon() {
     const toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
-
+    
     const icons = toggle.querySelectorAll('i');
+    const themeIndex = currentTheme === 'light' ? 0 : currentTheme === 'dark' ? 1 : 2;
     icons.forEach((icon, index) => {
-        icon.style.opacity = index === themeCycle.indexOf(currentTheme) ? '1' : '0';
+        icon.style.opacity = index === themeIndex ? '1' : '0';
     });
 }
 
@@ -532,15 +533,17 @@ function applyCustomTheme() {
     const secondaryColor = document.getElementById('secondary-color').value;
     
     console.log('Applying custom theme:', primaryColor, secondaryColor);
-    
+    console.log('Primary RGB:', hexToRgb(primaryColor));
+    console.log('Secondary RGB:', hexToRgb(secondaryColor));
+
     // Calculate text colors for accessibility
     const primaryTextColor = getContrastColor(primaryColor);
     const secondaryTextColor = getContrastColor(secondaryColor);
     const bgColor = getBackgroundColor(primaryColor, secondaryColor);
     const textColor = getContrastColor(bgColor);
-    
+
     console.log('Calculated colors:', { bgColor, textColor });
-    
+
     // Set custom theme variables directly on the root element
     document.documentElement.style.setProperty('--primary-color', primaryColor);
     document.documentElement.style.setProperty('--secondary-color', secondaryColor);
@@ -550,24 +553,24 @@ function applyCustomTheme() {
     document.documentElement.style.setProperty('--card-bg', adjustColorLightness(bgColor, 0.05));
     document.documentElement.style.setProperty('--border-color', adjustColorLightness(bgColor, 0.1));
     document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`);
-    
+
     // Save custom theme
-    const customTheme = { 
-        primary: primaryColor, 
+    const customTheme = {
+        primary: primaryColor,
         secondary: secondaryColor,
         bgColor: bgColor,
         textColor: textColor
     };
     localStorage.setItem('customTheme', JSON.stringify(customTheme));
-    
+
     // Set theme to custom and update UI
     currentTheme = 'custom';
     document.documentElement.setAttribute('data-theme', 'custom');
     localStorage.setItem('theme', 'custom');
     updateThemeToggleIcon();
-    
+
     closeThemeModal();
-    
+
     console.log('Custom theme applied successfully');
 }
 
@@ -580,6 +583,10 @@ function resetCustomTheme() {
 // Utility functions for color calculations
 function getContrastColor(hexColor) {
     const rgb = hexToRgb(hexColor);
+    if (!rgb) {
+        console.error('Invalid hex color:', hexColor);
+        return '#1f2937'; // Default to dark text
+    }
     const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
     return brightness > 128 ? '#1f2937' : '#f9fafb';
 }
@@ -587,12 +594,17 @@ function getContrastColor(hexColor) {
 function getBackgroundColor(primary, secondary) {
     const primaryRgb = hexToRgb(primary);
     const secondaryRgb = hexToRgb(secondary);
-
+    
+    if (!primaryRgb || !secondaryRgb) {
+        console.error('Invalid hex colors:', primary, secondary);
+        return '#ffffff'; // Default to white background
+    }
+    
     // Create a subtle background color
     const avgR = Math.round((primaryRgb.r + secondaryRgb.r) / 2);
     const avgG = Math.round((primaryRgb.g + secondaryRgb.g) / 2);
     const avgB = Math.round((primaryRgb.b + secondaryRgb.b) / 2);
-
+    
     // Make it very light for background
     return `rgb(${Math.min(255, avgR + 200)}, ${Math.min(255, avgG + 200)}, ${Math.min(255, avgB + 200)})`;
 }
