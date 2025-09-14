@@ -18,13 +18,21 @@ function showSection(sectionId) {
     if (sectionId === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (selectedSection) {
-        // Scroll to section heading
+        // Scroll to section heading with proper navigation offset
         const sectionHeading = selectedSection.querySelector("h2, .hero-title");
         if (sectionHeading) {
             const navHeight = document.querySelector(".navbar").offsetHeight;
             const headingPosition = sectionHeading.getBoundingClientRect().top + window.scrollY;
             window.scrollTo({
-                top: headingPosition - navHeight - 20,
+                top: headingPosition - navHeight - 30, // Extra 30px for better spacing
+                behavior: "smooth"
+            });
+        } else {
+            // If no heading found, scroll to top of section
+            const sectionTop = selectedSection.getBoundingClientRect().top + window.scrollY;
+            const navHeight = document.querySelector(".navbar").offsetHeight;
+            window.scrollTo({
+                top: sectionTop - navHeight - 20,
                 behavior: "smooth"
             });
         }
