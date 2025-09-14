@@ -397,10 +397,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     const savedBaseTheme = localStorage.getItem('baseTheme') || 'light';
     const savedCustomColors = localStorage.getItem('customColors');
-    
+
     // Set base theme
     baseTheme = savedBaseTheme;
-    
+
     if (savedTheme === 'custom' && savedCustomColors) {
         // Restore custom colors
         customColors = JSON.parse(savedCustomColors);
@@ -442,8 +442,9 @@ function selectTheme(theme) {
     if (theme === 'custom') {
         openThemeModal();
     } else {
-        // Set base theme (light or dark)
+        // Set base theme (light or dark) and clear custom colors
         baseTheme = theme;
+        customColors = null;
         setTheme(theme);
     }
     // Close the menu
@@ -464,7 +465,6 @@ function setTheme(theme) {
         }
     } else {
         // Set base theme and clear custom colors
-        baseTheme = theme;
         document.documentElement.setAttribute('data-theme', theme);
         customColors = null;
         // Clear any custom color overrides
@@ -501,22 +501,27 @@ function clearCustomColors() {
 function updateThemeToggleIcon() {
     const toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
-    
+
     const icons = toggle.querySelectorAll('i');
     let themeIndex;
-    
+
     if (currentTheme === 'custom') {
         themeIndex = 2; // Palette icon for custom colors
     } else {
         themeIndex = baseTheme === 'light' ? 0 : 1; // Sun or moon based on base theme
     }
-    
+
     icons.forEach((icon, index) => {
         icon.style.opacity = index === themeIndex ? '1' : '0';
     });
 }
 
 function openThemeModal() {
+    const menu = document.getElementById('theme-menu');
+    if (menu) {
+        menu.classList.remove('show');
+    }
+    
     const modal = document.getElementById('theme-modal');
     if (modal) {
         modal.style.display = 'block';
@@ -562,32 +567,32 @@ function updateCustomTheme() {
 function applyCustomTheme() {
     const primaryColor = document.getElementById('primary-color').value;
     const secondaryColor = document.getElementById('secondary-color').value;
-    
+
     console.log('Applying custom colors:', primaryColor, secondaryColor);
     console.log('Base theme:', baseTheme);
-    
+
     // Store custom colors
     customColors = {
         primary: primaryColor,
         secondary: secondaryColor
     };
-    
+
     // Apply custom colors to current base theme
     applyCustomColors(customColors);
-    
+
     // Set theme to custom
     currentTheme = 'custom';
     document.documentElement.setAttribute('data-theme', baseTheme);
-    
+
     // Save theme state
     localStorage.setItem('theme', 'custom');
     localStorage.setItem('baseTheme', baseTheme);
     localStorage.setItem('customColors', JSON.stringify(customColors));
-    
+
     // Update UI
     updateThemeToggleIcon();
     closeThemeModal();
-    
+
     console.log('Custom colors applied successfully');
 }
 

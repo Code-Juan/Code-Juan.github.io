@@ -1,27 +1,31 @@
 /* CSS Variables for Theme System */
 :root {
-    /* Light Theme (Default) - Base colors */
-    --primary-color: #2563eb;
-    --secondary-color: #7c3aed;
+    /* Light Theme (Default) - Base colors only */
     --bg-color: #ffffff;
     --text-color: #1f2937;
     --text-light: #6b7280;
     --card-bg: #f9fafb;
     --border-color: #e5e7eb;
     --shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Default accent colors (can be overridden by custom colors) */
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
     --hero-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
-/* Dark Theme - Base colors */
+/* Dark Theme - Base colors only */
 [data-theme="dark"] {
-    --primary-color: #3b82f6;
-    --secondary-color: #8b5cf6;
     --bg-color: #111827;
     --text-color: #f9fafb;
     --text-light: #d1d5db;
     --card-bg: #1f2937;
     --border-color: #374151;
     --shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Default accent colors for dark theme (can be overridden by custom colors) */
+    --primary-color: #3b82f6;
+    --secondary-color: #8b5cf6;
     --hero-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
