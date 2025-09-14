@@ -2,6 +2,7 @@
 :root {
     /* Light Theme (Default) - Base colors only */
     --bg-color: #ffffff;
+    --bg-color-rgb: 255, 255, 255;
     --text-color: #1f2937;
     --text-light: #6b7280;
     --card-bg: #f9fafb;
@@ -17,6 +18,7 @@
 /* Dark Theme - Base colors only */
 [data-theme="dark"] {
     --bg-color: #111827;
+    --bg-color-rgb: 17, 24, 39;
     --text-color: #f9fafb;
     --text-light: #d1d5db;
     --card-bg: #1f2937;
@@ -387,7 +389,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(var(--bg-color-rgb), 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
@@ -406,13 +408,14 @@ body {
 .nav-logo a {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2563eb;
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .nav-logo a:hover {
-    color: #1d4ed8;
+    color: var(--primary-color);
+    opacity: 0.8;
 }
 
 .nav-menu {
@@ -422,7 +425,7 @@ body {
 }
 
 .nav-link {
-    color: #333;
+    color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -431,7 +434,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #2563eb;
+    color: var(--primary-color);
 }
 
 .nav-link::after {
@@ -1121,7 +1124,7 @@ section {
 
 /* Navigation CTA Button */
 .cta-button {
-    background-color: #2563eb !important;
+    background-color: var(--primary-color) !important;
     color: white !important;
     padding: 0.5rem 1rem !important;
     border-radius: 6px !important;
@@ -1130,7 +1133,8 @@ section {
 }
 
 .cta-button:hover {
-    background-color: #1d4ed8 !important;
+    background-color: var(--primary-color) !important;
+    opacity: 0.9 !important;
     transform: translateY(-1px) !important;
 }
 
