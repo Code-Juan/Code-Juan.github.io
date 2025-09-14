@@ -477,7 +477,7 @@ function setTheme(theme) {
 function updateThemeToggleIcon() {
     const toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
-    
+
     const icons = toggle.querySelectorAll('i');
     const themeIndex = currentTheme === 'light' ? 0 : currentTheme === 'dark' ? 1 : 2;
     icons.forEach((icon, index) => {
@@ -531,7 +531,7 @@ function updateCustomTheme() {
 function applyCustomTheme() {
     const primaryColor = document.getElementById('primary-color').value;
     const secondaryColor = document.getElementById('secondary-color').value;
-    
+
     console.log('Applying custom theme:', primaryColor, secondaryColor);
     console.log('Primary RGB:', hexToRgb(primaryColor));
     console.log('Secondary RGB:', hexToRgb(secondaryColor));
@@ -581,12 +581,30 @@ function resetCustomTheme() {
 }
 
 // Utility functions for color calculations
-function getContrastColor(hexColor) {
-    const rgb = hexToRgb(hexColor);
+function getContrastColor(color) {
+    let rgb;
+    
+    // Handle both hex and RGB color formats
+    if (color.startsWith('rgb(')) {
+        // Parse RGB string like "rgb(255, 255, 255)"
+        const matches = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (matches) {
+            rgb = {
+                r: parseInt(matches[1]),
+                g: parseInt(matches[2]),
+                b: parseInt(matches[3])
+            };
+        }
+    } else {
+        // Handle hex color
+        rgb = hexToRgb(color);
+    }
+    
     if (!rgb) {
-        console.error('Invalid hex color:', hexColor);
+        console.error('Invalid color format:', color);
         return '#1f2937'; // Default to dark text
     }
+    
     const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
     return brightness > 128 ? '#1f2937' : '#f9fafb';
 }
@@ -594,17 +612,17 @@ function getContrastColor(hexColor) {
 function getBackgroundColor(primary, secondary) {
     const primaryRgb = hexToRgb(primary);
     const secondaryRgb = hexToRgb(secondary);
-    
+
     if (!primaryRgb || !secondaryRgb) {
         console.error('Invalid hex colors:', primary, secondary);
         return '#ffffff'; // Default to white background
     }
-    
+
     // Create a subtle background color
     const avgR = Math.round((primaryRgb.r + secondaryRgb.r) / 2);
     const avgG = Math.round((primaryRgb.g + secondaryRgb.g) / 2);
     const avgB = Math.round((primaryRgb.b + secondaryRgb.b) / 2);
-    
+
     // Make it very light for background
     return `rgb(${Math.min(255, avgR + 200)}, ${Math.min(255, avgG + 200)}, ${Math.min(255, avgB + 200)})`;
 }
