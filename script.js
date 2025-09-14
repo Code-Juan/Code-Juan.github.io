@@ -5,6 +5,19 @@ function showSection(sectionId) {
         section.classList.remove("active");
     });
     
+    // Hide home section for audience-specific sections
+    const homeSection = document.getElementById("home");
+    if (sectionId === "game-dev" || sectionId === "web-services" || sectionId === "contact") {
+        if (homeSection) {
+            homeSection.style.display = "none";
+        }
+    } else {
+        // Show home section for other sections
+        if (homeSection) {
+            homeSection.style.display = "block";
+        }
+    }
+    
     // Show selected section
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
@@ -380,6 +393,12 @@ document.head.appendChild(activeNavStyles);
 
 // Initialize SPA - Set home section as active by default
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure home section is visible on page load
+    const homeSection = document.getElementById("home");
+    if (homeSection) {
+        homeSection.style.display = "block";
+    }
+    
     // Set home section as active
     showSection('home');
     
