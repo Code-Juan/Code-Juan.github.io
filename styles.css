@@ -39,6 +39,8 @@
 [data-theme="custom"] {
     /* Custom accent colors will be set via JavaScript */
     /* Base theme colors remain from light or dark theme */
+    /* This selector is intentionally empty as colors are applied via JavaScript */
+    color: inherit;
 }
 
 /* Reset and Base Styles */
@@ -693,7 +695,7 @@ section {
     font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
-    color: #1f2937;
+    color: var(--text-color);
     position: relative;
 }
 
@@ -705,7 +707,7 @@ section {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     border-radius: 2px;
 }
 
@@ -1016,22 +1018,22 @@ section {
 }
 
 .service-card {
-    background: white;
+    background: var(--bg-color);
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px var(--shadow);
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     position: relative;
 }
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px var(--shadow);
 }
 
 .service-card.featured {
-    border-color: #2563eb;
+    border-color: var(--primary-color);
     transform: scale(1.05);
 }
 
@@ -1040,7 +1042,7 @@ section {
     top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    background: #2563eb;
+    background: var(--primary-color);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -1080,7 +1082,7 @@ section {
 }
 
 .service-features i {
-    color: #10b981;
+    color: var(--primary-color);
     font-size: 0.875rem;
 }
 
