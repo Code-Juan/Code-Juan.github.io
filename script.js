@@ -4,7 +4,7 @@ function showSection(sectionId) {
     document.querySelectorAll("section").forEach((section) => {
         section.classList.remove("active");
     });
-    
+
     // Hide home section for audience-specific sections
     const homeSection = document.getElementById("home");
     if (sectionId === "game-dev" || sectionId === "web-services" || sectionId === "contact") {
@@ -17,16 +17,16 @@ function showSection(sectionId) {
             homeSection.style.display = "block";
         }
     }
-    
+
     // Show selected section
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
         selectedSection.classList.add("active");
     }
-    
+
     // Update navigation based on context
     updateNavigation(sectionId);
-    
+
     // Handle scrolling
     if (sectionId === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -55,16 +55,16 @@ function showSection(sectionId) {
 // Context-aware navigation
 function updateNavigation(currentSection) {
     const navLinks = document.querySelectorAll(".nav-link");
-    
+
     // Reset all links
     navLinks.forEach(link => {
         link.classList.remove("active");
         link.style.display = "block";
     });
-    
+
     // Keep Home button visible in all sections for better navigation
     // Removed the code that hides Home button in audience sections
-    
+
     // Set active state for current section
     const activeLink = document.querySelector(`a[onclick="showSection('${currentSection}')"]`);
     if (activeLink) {
@@ -392,22 +392,188 @@ document.head.appendChild(activeNavStyles);
 // Portfolio Tab Functionality - Removed since we now have separate audience-based sections
 
 // Initialize SPA - Set home section as active by default
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize theme system
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    
     // Ensure home section is visible on page load
     const homeSection = document.getElementById("home");
     if (homeSection) {
         homeSection.style.display = "block";
     }
-    
+
     // Set home section as active
     showSection('home');
-    
+
     // Add active class to home nav link
     const homeLink = document.querySelector('a[onclick="showSection(\'home\')"]');
     if (homeLink) {
         homeLink.classList.add('active');
     }
 });
+
+// Theme System
+let currentTheme = 'light';
+let themeCycle = ['light', 'dark', 'custom'];
+
+function toggleTheme() {
+    const currentIndex = themeCycle.indexOf(currentTheme);
+    const nextIndex = (currentIndex + 1) % themeCycle.length;
+    const nextTheme = themeCycle[nextIndex];
+
+    if (nextTheme === 'custom') {
+        openThemeModal();
+    } else {
+        setTheme(nextTheme);
+    }
+}
+
+function setTheme(theme) {
+    currentTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+
+    // Update theme toggle button icon
+    updateThemeToggleIcon();
+}
+
+function updateThemeToggleIcon() {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    const icons = toggle.querySelectorAll('i');
+    icons.forEach((icon, index) => {
+        icon.style.opacity = index === themeCycle.indexOf(currentTheme) ? '1' : '0';
+    });
+}
+
+function openThemeModal() {
+    const modal = document.getElementById('theme-modal');
+    if (modal) {
+        modal.style.display = 'block';
+        // Load current custom colors if they exist
+        const customColors = JSON.parse(localStorage.getItem('customTheme') || '{}');
+        if (customColors.primary) {
+            document.getElementById('primary-color').value = customColors.primary;
+        }
+        if (customColors.secondary) {
+            document.getElementById('secondary-color').value = customColors.secondary;
+        }
+        updateCustomTheme();
+    }
+}
+
+function closeThemeModal() {
+    const modal = document.getElementById('theme-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function updateCustomTheme() {
+    const primaryColor = document.getElementById('primary-color').value;
+    const secondaryColor = document.getElementById('secondary-color').value;
+
+    // Update preview
+    const previewHeader = document.querySelector('.preview-header');
+    const previewButton = document.querySelector('.preview-button');
+
+    if (previewHeader) {
+        previewHeader.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+    }
+    if (previewButton) {
+        previewButton.style.background = primaryColor;
+    }
+}
+
+function applyCustomTheme() {
+    const primaryColor = document.getElementById('primary-color').value;
+    const secondaryColor = document.getElementById('secondary-color').value;
+
+    // Calculate text colors for accessibility
+    const primaryTextColor = getContrastColor(primaryColor);
+    const secondaryTextColor = getContrastColor(secondaryColor);
+    const bgColor = getBackgroundColor(primaryColor, secondaryColor);
+    const textColor = getContrastColor(bgColor);
+
+    // Set custom theme variables
+    document.documentElement.style.setProperty('--primary-color', primaryColor);
+    document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+    document.documentElement.style.setProperty('--bg-color', bgColor);
+    document.documentElement.style.setProperty('--text-color', textColor);
+    document.documentElement.style.setProperty('--text-light', adjustColorOpacity(textColor, 0.7));
+    document.documentElement.style.setProperty('--card-bg', adjustColorLightness(bgColor, 0.05));
+    document.documentElement.style.setProperty('--border-color', adjustColorLightness(bgColor, 0.1));
+    document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`);
+
+    // Save custom theme
+    const customTheme = { primary: primaryColor, secondary: secondaryColor };
+    localStorage.setItem('customTheme', JSON.stringify(customTheme));
+
+    setTheme('custom');
+    closeThemeModal();
+}
+
+function resetCustomTheme() {
+    document.getElementById('primary-color').value = '#2563eb';
+    document.getElementById('secondary-color').value = '#7c3aed';
+    updateCustomTheme();
+}
+
+// Utility functions for color calculations
+function getContrastColor(hexColor) {
+    const rgb = hexToRgb(hexColor);
+    const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+    return brightness > 128 ? '#1f2937' : '#f9fafb';
+}
+
+function getBackgroundColor(primary, secondary) {
+    const primaryRgb = hexToRgb(primary);
+    const secondaryRgb = hexToRgb(secondary);
+
+    // Create a subtle background color
+    const avgR = Math.round((primaryRgb.r + secondaryRgb.r) / 2);
+    const avgG = Math.round((primaryRgb.g + secondaryRgb.g) / 2);
+    const avgB = Math.round((primaryRgb.b + secondaryRgb.b) / 2);
+
+    // Make it very light for background
+    return `rgb(${Math.min(255, avgR + 200)}, ${Math.min(255, avgG + 200)}, ${Math.min(255, avgB + 200)})`;
+}
+
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+function adjustColorOpacity(color, opacity) {
+    const rgb = hexToRgb(color);
+    if (!rgb) return color;
+    return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+}
+
+function adjustColorLightness(hex, factor) {
+    const rgb = hexToRgb(hex);
+    if (!rgb) return hex;
+
+    const newR = Math.round(rgb.r + (255 - rgb.r) * factor);
+    const newG = Math.round(rgb.g + (255 - rgb.g) * factor);
+    const newB = Math.round(rgb.b + (255 - rgb.b) * factor);
+
+    return `rgb(${newR}, ${newG}, ${newB})`;
+}
+
+// Close modal when clicking outside
+window.onclick = function (event) {
+    const modal = document.getElementById('theme-modal');
+    if (event.target === modal) {
+        closeThemeModal();
+    }
+}
 
 // Console welcome message
 console.log(`
@@ -420,6 +586,7 @@ console.log(`
    • Responsive Layout
    • Game Development Focus
    • SPA Architecture
+   • Advanced Theme System
    
    Ready to build amazing games and websites? Let's talk!
 `);
