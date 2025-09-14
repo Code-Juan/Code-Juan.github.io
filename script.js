@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize theme system
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
-    
+
     // Ensure home section is visible on page load
     const homeSection = document.getElementById("home");
     if (homeSection) {
@@ -415,17 +415,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Theme System
 let currentTheme = 'light';
-let themeCycle = ['light', 'dark', 'custom'];
 
-function toggleTheme() {
-    const currentIndex = themeCycle.indexOf(currentTheme);
-    const nextIndex = (currentIndex + 1) % themeCycle.length;
-    const nextTheme = themeCycle[nextIndex];
+function toggleThemeMenu() {
+    const menu = document.getElementById('theme-menu');
+    if (menu) {
+        menu.classList.toggle('show');
+    }
+}
 
-    if (nextTheme === 'custom') {
+function selectTheme(theme) {
+    if (theme === 'custom') {
         openThemeModal();
     } else {
-        setTheme(nextTheme);
+        setTheme(theme);
+    }
+    // Close the menu
+    const menu = document.getElementById('theme-menu');
+    if (menu) {
+        menu.classList.remove('show');
     }
 }
 
@@ -490,13 +497,17 @@ function updateCustomTheme() {
 function applyCustomTheme() {
     const primaryColor = document.getElementById('primary-color').value;
     const secondaryColor = document.getElementById('secondary-color').value;
-
+    
+    console.log('Applying custom theme:', primaryColor, secondaryColor);
+    
     // Calculate text colors for accessibility
     const primaryTextColor = getContrastColor(primaryColor);
     const secondaryTextColor = getContrastColor(secondaryColor);
     const bgColor = getBackgroundColor(primaryColor, secondaryColor);
     const textColor = getContrastColor(bgColor);
-
+    
+    console.log('Calculated colors:', { bgColor, textColor });
+    
     // Set custom theme variables
     document.documentElement.style.setProperty('--primary-color', primaryColor);
     document.documentElement.style.setProperty('--secondary-color', secondaryColor);
@@ -506,13 +517,15 @@ function applyCustomTheme() {
     document.documentElement.style.setProperty('--card-bg', adjustColorLightness(bgColor, 0.05));
     document.documentElement.style.setProperty('--border-color', adjustColorLightness(bgColor, 0.1));
     document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`);
-
+    
     // Save custom theme
     const customTheme = { primary: primaryColor, secondary: secondaryColor };
     localStorage.setItem('customTheme', JSON.stringify(customTheme));
-
+    
     setTheme('custom');
     closeThemeModal();
+    
+    console.log('Custom theme applied successfully');
 }
 
 function resetCustomTheme() {
@@ -570,8 +583,16 @@ function adjustColorLightness(hex, factor) {
 // Close modal when clicking outside
 window.onclick = function (event) {
     const modal = document.getElementById('theme-modal');
+    const themeMenu = document.getElementById('theme-menu');
+    const themeSelector = document.querySelector('.theme-selector');
+    
     if (event.target === modal) {
         closeThemeModal();
+    }
+    
+    // Close theme menu when clicking outside
+    if (themeMenu && !themeSelector.contains(event.target)) {
+        themeMenu.classList.remove('show');
     }
 }
 
