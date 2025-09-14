@@ -1,5 +1,9 @@
 // SPA Section Management
 function showSection(sectionId) {
+    console.log('Switching to section:', sectionId);
+    console.log('Current theme before switch:', currentTheme);
+    console.log('Document data-theme before switch:', document.documentElement.getAttribute('data-theme'));
+    
     // Hide all sections
     document.querySelectorAll("section").forEach((section) => {
         section.classList.remove("active");
@@ -26,6 +30,9 @@ function showSection(sectionId) {
 
     // Update navigation based on context
     updateNavigation(sectionId);
+    
+    console.log('Document data-theme after switch:', document.documentElement.getAttribute('data-theme'));
+    console.log('Navbar background after switch:', window.getComputedStyle(document.querySelector('.navbar')).backgroundColor);
 
     // Handle scrolling
     if (sectionId === "home") {
@@ -461,6 +468,7 @@ function selectTheme(theme) {
 
 function setTheme(theme) {
     currentTheme = theme;
+    console.log('Setting theme:', theme, 'Base theme:', baseTheme);
 
     if (theme === 'custom') {
         // Apply custom colors to current base theme
@@ -475,6 +483,9 @@ function setTheme(theme) {
         // Clear any custom color overrides
         clearCustomColors();
     }
+
+    console.log('Document data-theme attribute:', document.documentElement.getAttribute('data-theme'));
+    console.log('Navbar background computed style:', window.getComputedStyle(document.querySelector('.navbar')).backgroundColor);
 
     // Save theme state
     localStorage.setItem('theme', theme);
@@ -493,7 +504,7 @@ function applyCustomColors(colors) {
     // Apply custom accent colors while keeping base theme
     const primaryRgb = hexToRgb(colors.primary);
     const secondaryRgb = hexToRgb(colors.secondary);
-    
+
     document.documentElement.style.setProperty('--primary-color', colors.primary);
     document.documentElement.style.setProperty('--primary-color-rgb', `${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}`);
     document.documentElement.style.setProperty('--secondary-color', colors.secondary);

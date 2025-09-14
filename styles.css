@@ -8,7 +8,7 @@
     --card-bg: #f9fafb;
     --border-color: #e5e7eb;
     --shadow: rgba(0, 0, 0, 0.1);
-    
+
     /* Default accent colors (can be overridden by custom colors) */
     --primary-color: #2563eb;
     --primary-color-rgb: 37, 99, 235;
@@ -26,7 +26,7 @@
     --card-bg: #1f2937;
     --border-color: #374151;
     --shadow: rgba(0, 0, 0, 0.3);
-    
+
     /* Default accent colors for dark theme (can be overridden by custom colors) */
     --primary-color: #3b82f6;
     --primary-color-rgb: 59, 130, 246;
@@ -105,22 +105,58 @@ section#home {
     font-size: 16px;
 }
 
-.theme-toggle i:nth-child(1) { opacity: 1; } /* Sun - Light theme */
-.theme-toggle i:nth-child(2) { opacity: 0; } /* Moon - Dark theme */
-.theme-toggle i:nth-child(3) { opacity: 0; } /* Palette - Custom theme */
+.theme-toggle i:nth-child(1) {
+    opacity: 1;
+}
+
+/* Sun - Light theme */
+.theme-toggle i:nth-child(2) {
+    opacity: 0;
+}
+
+/* Moon - Dark theme */
+.theme-toggle i:nth-child(3) {
+    opacity: 0;
+}
+
+/* Palette - Custom theme */
 
 /* Theme states */
-[data-theme="light"] .theme-toggle i:nth-child(1) { opacity: 1; }
-[data-theme="light"] .theme-toggle i:nth-child(2) { opacity: 0; }
-[data-theme="light"] .theme-toggle i:nth-child(3) { opacity: 0; }
+[data-theme="light"] .theme-toggle i:nth-child(1) {
+    opacity: 1;
+}
 
-[data-theme="dark"] .theme-toggle i:nth-child(1) { opacity: 0; }
-[data-theme="dark"] .theme-toggle i:nth-child(2) { opacity: 1; }
-[data-theme="dark"] .theme-toggle i:nth-child(3) { opacity: 0; }
+[data-theme="light"] .theme-toggle i:nth-child(2) {
+    opacity: 0;
+}
 
-[data-theme="custom"] .theme-toggle i:nth-child(1) { opacity: 0; }
-[data-theme="custom"] .theme-toggle i:nth-child(2) { opacity: 0; }
-[data-theme="custom"] .theme-toggle i:nth-child(3) { opacity: 1; }
+[data-theme="light"] .theme-toggle i:nth-child(3) {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-toggle i:nth-child(1) {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-toggle i:nth-child(2) {
+    opacity: 1;
+}
+
+[data-theme="dark"] .theme-toggle i:nth-child(3) {
+    opacity: 0;
+}
+
+[data-theme="custom"] .theme-toggle i:nth-child(1) {
+    opacity: 0;
+}
+
+[data-theme="custom"] .theme-toggle i:nth-child(2) {
+    opacity: 0;
+}
+
+[data-theme="custom"] .theme-toggle i:nth-child(3) {
+    opacity: 1;
+}
 
 /* Theme Menu */
 .theme-menu {
@@ -140,8 +176,15 @@ section#home {
 }
 
 @keyframes themeMenuSlide {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .theme-menu.show {
@@ -253,8 +296,15 @@ section#home {
 }
 
 @keyframes modalSlideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .theme-modal-header {
@@ -393,7 +443,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(var(--bg-color-rgb), 0.95);
+    background: var(--bg-color) !important;
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
@@ -448,7 +498,7 @@ body {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: #2563eb;
+    background-color: var(--primary-color);
     transition: width 0.3s ease;
 }
 
@@ -465,7 +515,7 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #333;
+    background-color: var(--text-color);
     margin: 3px 0;
     transition: 0.3s;
 }
@@ -1282,11 +1332,11 @@ section {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: white;
+        background-color: var(--bg-color);
         width: 100%;
         text-align: center;
         transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 27px var(--shadow);
         padding: 2rem 0;
     }
 
@@ -1418,7 +1468,7 @@ section {
 .btn:focus,
 .nav-link:focus,
 .project-link:focus {
-    outline: 2px solid #2563eb;
+    outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
 
