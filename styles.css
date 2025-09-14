@@ -948,11 +948,11 @@ section {
 }
 
 .skill-category {
-    background: white;
+    background: var(--bg-color);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .skill-category-title {
@@ -1101,10 +1101,10 @@ section {
 
 .maintenance-addon {
     text-align: center;
-    background: white;
+    background: var(--bg-color);
     padding: 2rem;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
 }
 
 .maintenance-addon h3 {
@@ -1129,17 +1129,17 @@ section {
 }
 
 .testimonial-card {
-    background: white;
+    background: var(--bg-color);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px var(--shadow);
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px var(--shadow);
 }
 
 .testimonial-content {
@@ -1257,11 +1257,11 @@ section {
 }
 
 .contact-form {
-    background: white;
+    background: var(--bg-color);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -1272,7 +1272,7 @@ section {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
@@ -1292,8 +1292,8 @@ section {
 
 /* Footer */
 .footer {
-    background-color: #1f2937;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     padding: 2rem 0;
     position: relative;
     z-index: 2;
@@ -1314,7 +1314,7 @@ section {
 }
 
 .footer-links a {
-    color: #d1d5db;
+    color: var(--text-light);
     text-decoration: none;
     transition: color 0.3s ease;
     cursor: pointer;
