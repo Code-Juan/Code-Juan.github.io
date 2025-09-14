@@ -104,9 +104,6 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     position: relative;
@@ -261,6 +258,14 @@ section {
     padding: 5rem 0;
 }
 
+/* Hero section should account for fixed navbar */
+.hero {
+    padding-top: 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -285,6 +290,8 @@ section {
 /* About Section */
 .about {
     background-color: #f9fafb;
+    position: relative;
+    z-index: 1;
 }
 
 .about-content {
