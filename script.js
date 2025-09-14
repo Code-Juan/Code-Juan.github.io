@@ -442,10 +442,15 @@ function selectTheme(theme) {
     if (theme === 'custom') {
         openThemeModal();
     } else {
-        // Set base theme (light or dark) and clear custom colors
+        // Set base theme (light or dark) but preserve custom colors if they exist
         baseTheme = theme;
-        customColors = null;
-        setTheme(theme);
+        if (customColors) {
+            // Keep custom colors and apply them to new base theme
+            setTheme('custom');
+        } else {
+            // No custom colors, just set base theme
+            setTheme(theme);
+        }
     }
     // Close the menu
     const menu = document.getElementById('theme-menu');
@@ -456,7 +461,7 @@ function selectTheme(theme) {
 
 function setTheme(theme) {
     currentTheme = theme;
-    
+
     if (theme === 'custom') {
         // Apply custom colors to current base theme
         document.documentElement.setAttribute('data-theme', baseTheme);
@@ -470,7 +475,7 @@ function setTheme(theme) {
         // Clear any custom color overrides
         clearCustomColors();
     }
-    
+
     // Save theme state
     localStorage.setItem('theme', theme);
     localStorage.setItem('baseTheme', baseTheme);
@@ -479,22 +484,29 @@ function setTheme(theme) {
     } else {
         localStorage.removeItem('customColors');
     }
-    
+
     // Update theme toggle button icon
     updateThemeToggleIcon();
 }
 
 function applyCustomColors(colors) {
     // Apply custom accent colors while keeping base theme
+    const primaryRgb = hexToRgb(colors.primary);
+    const secondaryRgb = hexToRgb(colors.secondary);
+    
     document.documentElement.style.setProperty('--primary-color', colors.primary);
+    document.documentElement.style.setProperty('--primary-color-rgb', `${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}`);
     document.documentElement.style.setProperty('--secondary-color', colors.secondary);
+    document.documentElement.style.setProperty('--secondary-color-rgb', `${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}`);
     document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`);
 }
 
 function clearCustomColors() {
     // Remove custom color overrides to return to base theme colors
     document.documentElement.style.removeProperty('--primary-color');
+    document.documentElement.style.removeProperty('--primary-color-rgb');
     document.documentElement.style.removeProperty('--secondary-color');
+    document.documentElement.style.removeProperty('--secondary-color-rgb');
     document.documentElement.style.removeProperty('--hero-bg');
 }
 
@@ -521,7 +533,7 @@ function openThemeModal() {
     if (menu) {
         menu.classList.remove('show');
     }
-    
+
     const modal = document.getElementById('theme-modal');
     if (modal) {
         modal.style.display = 'block';
@@ -531,7 +543,7 @@ function openThemeModal() {
             document.getElementById('secondary-color').value = customColors.secondary;
         } else {
             // Use default colors based on current base theme
-            const defaultColors = baseTheme === 'dark' 
+            const defaultColors = baseTheme === 'dark'
                 ? { primary: '#3b82f6', secondary: '#8b5cf6' }
                 : { primary: '#2563eb', secondary: '#7c3aed' };
             document.getElementById('primary-color').value = defaultColors.primary;
