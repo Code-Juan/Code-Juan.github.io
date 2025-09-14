@@ -29,6 +29,32 @@ section#home {
     font-weight: 600;
 }
 
+/* Projects Showcase in Web Services */
+.projects-showcase {
+    margin-bottom: 4rem;
+}
+
+.showcase-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.showcase-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
 html {
     scroll-behavior: smooth;
 }

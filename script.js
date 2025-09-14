@@ -353,25 +353,7 @@ activeNavStyles.textContent = `
 `;
 document.head.appendChild(activeNavStyles);
 
-// Portfolio Tab Functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetTab = button.getAttribute('data-tab');
-
-            // Remove active class from all buttons and contents
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            // Add active class to clicked button and corresponding content
-            button.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
-        });
-    });
-});
+// Portfolio Tab Functionality - Removed since we now have separate audience-based sections
 
 // Initialize SPA - Set home section as active by default
 document.addEventListener('DOMContentLoaded', function() {
