@@ -1,3 +1,41 @@
+// SPA Section Management
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll("section").forEach((section) => {
+        section.classList.remove("active");
+    });
+    
+    // Show selected section
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.add("active");
+    }
+    
+    // Update navigation active state
+    document.querySelectorAll(".nav-link").forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("onclick") && link.getAttribute("onclick").includes(sectionId)) {
+            link.classList.add("active");
+        }
+    });
+    
+    // Handle scrolling
+    if (sectionId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (selectedSection) {
+        // Scroll to section heading
+        const sectionHeading = selectedSection.querySelector("h2, .hero-title");
+        if (sectionHeading) {
+            const navHeight = document.querySelector(".navbar").offsetHeight;
+            const headingPosition = sectionHeading.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: headingPosition - navHeight - 20,
+                behavior: "smooth"
+            });
+        }
+    }
+}
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -335,6 +373,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Initialize SPA - Set home section as active by default
+document.addEventListener('DOMContentLoaded', function() {
+    // Set home section as active
+    showSection('home');
+    
+    // Add active class to home nav link
+    const homeLink = document.querySelector('a[onclick="showSection(\'home\')"]');
+    if (homeLink) {
+        homeLink.classList.add('active');
+    }
+});
+
 // Console welcome message
 console.log(`
 🚀 Welcome to Juan Contreras - Game Programmer & Web Developer!
@@ -345,6 +395,7 @@ console.log(`
    • Modern Design Principles
    • Responsive Layout
    • Game Development Focus
+   • SPA Architecture
    
    Ready to build amazing games and websites? Let's talk!
 `);
