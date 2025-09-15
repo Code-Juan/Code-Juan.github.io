@@ -1495,17 +1495,435 @@ section {
     }
 }
 
+/* Pricing Hero Section */
+.pricing-hero {
+    padding: 2rem 0 3rem 0;
+    background: var(--hero-bg);
+    text-align: center;
+    margin-top: 80px;
+    /* Account for fixed navbar */
+}
+
+.pricing-hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
 /* Pricing Comparison Page Styles */
 .pricing-comparison {
-    padding: 6rem 0;
+    padding: 4rem 0;
+    background: var(--card-bg);
+    margin-top: 1rem;
+}
+
+.section-intro {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 2rem 0;
+    background: var(--bg-color);
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.step {
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+}
+
+.step h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.step p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Scope Notes */
+.scope-note {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Sticky CTA */
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -4px 12px var(--shadow);
+    z-index: 1000;
+    padding: 1rem 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.sticky-cta.show {
+    transform: translateY(0);
+}
+
+.sticky-cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.sticky-cta span {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.sticky-cta .btn {
+    flex-shrink: 0;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* Add-ons Section */
+.addons-section {
+    margin: 2rem 0;
+    padding: 2rem 0;
+    background: var(--bg-color);
+    border-radius: 12px;
+}
+
+.addons-title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.addon-item {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.addon-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--shadow);
+}
+
+.addon-item h4 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.addon-price {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.addon-item p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Pricing Table Styles */
+.pricing-table-container {
+    overflow-x: auto;
+    margin: 3rem 0 3rem 0;
+    padding: 2.5rem 0 0 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px var(--shadow);
+    background: var(--bg-color);
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-color);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    table-layout: fixed;
+}
+
+.pricing-table caption {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.pricing-table th,
+.pricing-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pricing-table th {
+    background: var(--card-bg);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.pricing-table .feature-column {
+    width: 25%;
+    background: var(--card-bg);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.pricing-table .plan-column {
+    width: 25% !important;
+    min-width: 25%;
+    max-width: 25%;
+    text-align: center;
+    vertical-align: top;
+}
+
+.pricing-table .plan-column.featured {
+    width: 25% !important;
+    min-width: 25%;
+    max-width: 25%;
+    background: var(--card-bg);
+    border: 2px solid var(--primary-color);
+    position: relative;
+}
+
+.plan-badge {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 10;
+    box-shadow: 0 2px 8px var(--shadow);
+    line-height: 1.2;
+}
+
+.plan-header {
+    padding: 0.75rem 0;
+    margin-top: 1rem;
+}
+
+.plan-header .plan-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.plan-header .plan-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.plan-header .plan-description {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.feature-row {
+    transition: background-color 0.2s ease;
+}
+
+.feature-row:hover {
     background: var(--card-bg);
 }
 
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+.feature-name {
+    font-weight: 500;
+    color: var(--text-color);
+    background: var(--card-bg);
+}
+
+.feature-check {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.feature-x {
+    text-align: center;
+    color: #dc2626;
+    font-size: 1.2rem;
+}
+
+.feature-value {
+    text-align: center;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.action-row {
+    background: var(--card-bg);
+}
+
+.action-cell {
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.action-cell .btn {
+    min-width: 120px;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .pricing-hero {
+        padding: 1.5rem 0 2rem 0;
+        margin-top: 70px;
+    }
+
+    .pricing-hero-title {
+        font-size: 2rem;
+    }
+
+    .pricing-hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .how-it-works {
+        padding: 1.5rem 0;
+    }
+
+    .pricing-comparison {
+        padding: 2rem 0;
+    }
+
+    .pricing-table-container {
+        font-size: 0.875rem;
+        margin: 1rem 0 2rem 0;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .plan-header {
+        padding: 0.5rem 0;
+    }
+
+    .plan-header .plan-name {
+        font-size: 1.25rem;
+    }
+
+    .plan-header .plan-price {
+        font-size: 1.8rem;
+    }
+
+    .feature-name {
+        font-size: 0.875rem;
+    }
+
+    .action-cell .btn {
+        min-width: 100px;
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .scope-note {
+        font-size: 0.75rem;
+    }
+
+    .addons-section {
+        margin: 1.5rem 0;
+        padding: 1.5rem 0;
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .pricing-table th,
+    .pricing-table td {
+        padding: 0.5rem 0.25rem;
+    }
+
+    .plan-header .plan-name {
+        font-size: 1rem;
+    }
+
+    .plan-header .plan-price {
+        font-size: 1.5rem;
+    }
+
+    .plan-header .plan-description {
+        font-size: 0.8rem;
+    }
 }
 
 .pricing-card {
