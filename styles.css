@@ -1794,29 +1794,29 @@ section {
     .pricing-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .maintenance-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .faq-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .plan-price {
         flex-direction: column;
         align-items: center;
         gap: 0.25rem;
     }
-    
+
     .amount {
         font-size: 2.5rem;
     }
-    
+
     .cta-section h2 {
         font-size: 2rem;
     }
-    
+
     .cta-section p {
         font-size: 1.125rem;
     }
