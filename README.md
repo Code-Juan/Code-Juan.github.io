@@ -173,7 +173,7 @@ While this is a personal portfolio, suggestions and improvements are welcome:
 
 ## 📞 Contact
 
-- **Email**: your.email@example.com
+- **Email**: juan@codejuan.com | contact@codejuan.com
 - **GitHub**: [@Code-Juan](https://github.com/Code-Juan)
 - **LinkedIn**: [Your LinkedIn Profile]
 
