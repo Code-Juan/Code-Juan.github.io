@@ -171,7 +171,7 @@ if (contactForm) {
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
 
-        // Submit to Render endpoint
+        //submit to VPS endpoint
         fetch(this.action, {
             method: 'POST',
             body: formData
