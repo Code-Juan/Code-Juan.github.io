@@ -142,6 +142,7 @@ section#home {
 
 [data-theme="dark"] .theme-toggle i:nth-child(2) {
     opacity: 1;
+    color: white;
 }
 
 [data-theme="dark"] .theme-toggle i:nth-child(3) {
