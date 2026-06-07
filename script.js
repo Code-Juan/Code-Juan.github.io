@@ -292,7 +292,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.project-card, .skill-category, .contact-method');
+    const animatedElements = document.querySelectorAll('.project-card, .contact-method');
 
     animatedElements.forEach(el => {
         el.style.opacity = '0';

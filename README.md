@@ -173,9 +173,9 @@ While this is a personal portfolio, suggestions and improvements are welcome:
 
 ## 📞 Contact
 
-- **Email**: juan@codejuan.com | contact@codejuan.com
+- **Email**: contact@codejuan.com
 - **GitHub**: [@Code-Juan](https://github.com/Code-Juan)
-- **LinkedIn**: [Your LinkedIn Profile]
+- **LinkedIn**: [Juan Contreras](https://www.linkedin.com/in/juan-contreras68/)
 
 ## 🙏 Acknowledgments
 

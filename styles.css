@@ -937,65 +937,6 @@ section {
     opacity: 0.7;
 }
 
-/* Skills Section */
-.skills {
-    background-color: var(--card-bg);
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.skill-category {
-    background: var(--bg-color);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px var(--shadow);
-    border: 1px solid var(--border-color);
-}
-
-.skill-category-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-    text-align: center;
-}
-
-.skill-items {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.skill-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.skill-item:hover {
-    background-color: var(--border-color);
-    transform: translateX(5px);
-}
-
-.skill-item i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    width: 24px;
-}
-
-.skill-item span {
-    font-weight: 500;
-    color: var(--text-color);
-}
-
 /* Navigation CTA Button */
 .cta-button {
     background-color: var(--primary-color) !important;
@@ -1203,10 +1144,6 @@ section {
         grid-template-columns: 1fr;
     }
 
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
     .services-grid {
         grid-template-columns: 1fr;
     }
@@ -1255,7 +1192,6 @@ section {
 @media (prefers-reduced-motion: no-preference) {
 
     .project-card,
-    .skill-item,
     .contact-method {
         animation: fadeInUp 0.6s ease-out;
     }

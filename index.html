@@ -17,12 +17,22 @@
         content="Game Programmer specializing in C++ and C# development, with expertise in Unity and Unreal Engine.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://codejuan.com">
+    <meta property="og:image" content="https://codejuan.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Juan Contreras - Game Programmer & Software Developer">
     <meta name="twitter:description"
         content="Game Programmer specializing in C++ and C# development, with expertise in Unity and Unreal Engine.">
+    <meta name="twitter:image" content="https://codejuan.com/og-image.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -48,7 +58,7 @@
                         <a onclick="showSection('game-dev')" class="nav-link">Game Development</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://services.codejuan.com" class="nav-link" target="_blank">Web Services</a>
+                        <a href="https://services.codejuan.com" class="nav-link" target="_blank" rel="noopener noreferrer">Web Services</a>
                     </li>
                     <li class="nav-item">
                         <a onclick="showSection('contact')" class="nav-link cta-button">Get in Touch</a>
@@ -203,12 +213,6 @@
                                         <span class="tech-tag">3D Game Dev</span>
                                         <span class="tech-tag">AI Systems</span>
                                     </div>
-                                    <div class="project-links">
-                                        <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link"
-                                            target="_blank">
-                                            <i class="fab fa-github"></i> View Code
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -239,12 +243,6 @@
                                         <span class="tech-tag">C++</span>
                                         <span class="tech-tag">Component Systems</span>
                                         <span class="tech-tag">Memory Management</span>
-                                    </div>
-                                    <div class="project-links">
-                                        <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link"
-                                            target="_blank">
-                                            <i class="fab fa-github"></i> View Code
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -277,12 +275,6 @@
                                         <span class="tech-tag">Data Structures</span>
                                         <span class="tech-tag">Memory Management</span>
                                     </div>
-                                    <div class="project-links">
-                                        <a href="https://github.com/Code-Juan/Code-Juan.github.io" class="project-link"
-                                            target="_blank">
-                                            <i class="fab fa-github"></i> View Code
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -292,78 +284,6 @@
             </div>
         </section>
 
-
-        <!-- Skills Section -->
-        <section id="skills" class="skills">
-            <div class="container">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3 class="skill-category-title">Programming Languages</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <i class="fab fa-cuttlefish"></i>
-                                <span>C++</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-code"></i>
-                                <span>C#</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Dart</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-js-square"></i>
-                                <span>JavaScript</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3 class="skill-category-title">Game Development</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <i class="fas fa-cube"></i>
-                                <span>Unity Engine</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-rocket"></i>
-                                <span>Unreal Engine</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-robot"></i>
-                                <span>AI Systems</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-cogs"></i>
-                                <span>Gameplay Systems</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3 class="skill-category-title">Web & Mobile Development</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Flutter</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-node-js"></i>
-                                <span>Node.js</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-database"></i>
-                                <span>Supabase</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Cross-Platform</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Contact Section -->
         <section id="contact" class="contact">
@@ -380,17 +300,15 @@
                         <div class="contact-methods">
                             <div class="contact-method">
                                 <i class="fas fa-envelope"></i>
-                                <a href="mailto:juan@codejuan.com">juan@codejuan.com</a>
-                                <span style="margin: 0 0.5em; opacity: 0.7;">|</span>
                                 <a href="mailto:contact@codejuan.com">contact@codejuan.com</a>
                             </div>
                             <div class="contact-method">
                                 <i class="fab fa-github"></i>
-                                <a href="https://github.com/Code-Juan" target="_blank">github.com/Code-Juan</a>
+                                <a href="https://github.com/Code-Juan" target="_blank" rel="noopener noreferrer">github.com/Code-Juan</a>
                             </div>
                             <div class="contact-method">
                                 <i class="fab fa-linkedin"></i>
-                                <a href="#" target="_blank">LinkedIn Profile</a>
+                                <a href="https://www.linkedin.com/in/juan-contreras68/" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
                             </div>
                         </div>
                     </div>
@@ -401,7 +319,7 @@
                                 I'm tightening spam protection before turning this form back on. For now, please email me
                                 directly and include a short description of your project.
                             </p>
-                            <a href="mailto:juan@codejuan.com?subject=Project%20Inquiry" class="btn btn-primary">Email Juan Directly</a>
+                            <a href="mailto:contact@codejuan.com?subject=Project%20Inquiry" class="btn btn-primary">Email Juan Directly</a>
                         </div>
                     </div>
                 </div>
@@ -418,7 +336,7 @@
                     <a onclick="showSection('home')">Home</a>
                     <a onclick="showSection('about')">About</a>
                     <a onclick="showSection('game-dev')">Game Development</a>
-                    <a href="https://services.codejuan.com" target="_blank">Web Services</a>
+                    <a href="https://services.codejuan.com" target="_blank" rel="noopener noreferrer">Web Services</a>
                     <a onclick="showSection('contact')">Contact</a>
                 </div>
             </div>
